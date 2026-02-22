@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>const t = localStorage.getItem('camber_theme'); if (t) document.documentElement.setAttribute('data-theme', t);</script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Camber AI - Sign in to analyze civil engineering PDFs with AI.">
+    <title>Camber AI — Sign In</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a1a;
+            --bg-secondary: #111128;
+            --bg-tertiary: #1a1a3e;
+            --bg-card: rgba(26, 26, 62, 0.7);
+            --bg-glass: rgba(255, 255, 255, 0.04);
+            --bg-glass-hover: rgba(255, 255, 255, 0.08);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-active: rgba(129, 140, 248, 0.4);
+            --text-primary: #e8e8f0;
+            --text-secondary: #9898b8;
+            --text-muted: #6868a0;
+            --accent-1: #818cf8;
+            --accent-2: #c084fc;
+            --accent-3: #f472b6;
+            --accent-gradient: linear-gradient(135deg, #818cf8 0%, #c084fc 50%, #f472b6 100%);
+            --accent-gradient-subtle: linear-gradient(135deg, rgba(129, 140, 248, 0.15) 0%, rgba(192, 132, 252, 0.15) 100%);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 30px rgba(129, 140, 248, 0.15);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+        }
+
+        /* Light Theme */
+        [data-theme="light"] {
+            --bg-primary: #f0f0fa;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #eef0f8;
+            --bg-card: rgba(255, 255, 255, 0.85);
+            --bg-glass: rgba(0, 0, 0, 0.03);
+            --bg-glass-hover: rgba(0, 0, 0, 0.06);
+            --border-color: rgba(0, 0, 0, 0.1);
+            --text-primary: #1a1a2e;
+            --text-secondary: #555580;
+            --text-muted: #8888aa;
+            --accent-1: #6366f1;
+            --accent-2: #a855f7;
+            --accent-3: #ec4899;
+            --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.12);
+            --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.1);
+        }
+
+        [data-theme="light"] .google-btn {
+            background: #f8f9fa;
+            border-color: #dadce0;
+            color: #3c4043;
+        }
+
+        [data-theme="light"] .google-btn:hover {
+            background: #fff;
+        }
+
+        .theme-toggle-mini {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            color: var(--text-secondary);
+        }
+
+        .theme-toggle-mini:hover {
+            background: var(--bg-glass-hover);
+            transform: rotate(30deg);
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .bg-gradient {
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 10% 20%, rgba(129, 140, 248, 0.1) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 80% at 90% 80%, rgba(192, 132, 252, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 50% at 50% 50%, rgba(244, 114, 182, 0.05) 0%, transparent 60%);
+            z-index: 0;
+            animation: bgPulse 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgPulse {
+            0% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+
+            100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+        }
+
+        .bg-particles {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat 8s ease-in-out infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) scale(0);
+            }
+
+            10% {
+                opacity: 0.6;
+            }
+
+            90% {
+                opacity: 0.6;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-10vh) scale(1);
+            }
+        }
+
+        .login-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 440px;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 44px 36px;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-lg);
+            animation: cardIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes cardIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .logo-icon-wrapper {
+            width: 72px;
+            height: 72px;
+            background: var(--accent-gradient);
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-bottom: 18px;
+            box-shadow: var(--shadow-glow);
+            animation: logoGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoGlow {
+            0% {
+                box-shadow: 0 0 20px rgba(129, 140, 248, 0.25);
+            }
+
+            100% {
+                box-shadow: 0 0 40px rgba(192, 132, 252, 0.4);
+            }
+        }
+
+        .login-logo h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .login-logo .subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 6px;
+        }
+
+        /* Auth Tabs */
+        .auth-tabs {
+            display: flex;
+            gap: 4px;
+            background: var(--bg-glass);
+            border-radius: var(--radius-sm);
+            padding: 4px;
+            margin-bottom: 24px;
+            border: 1px solid var(--border-color);
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            background: none;
+            border: none;
+            border-radius: 6px;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .auth-tab:hover {
+            color: var(--text-primary);
+            background: var(--bg-glass-hover);
+        }
+
+        .auth-tab.active {
+            color: var(--text-primary);
+            background: var(--bg-tertiary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .auth-panel {
+            display: none;
+        }
+
+        .auth-panel.active {
+            display: block;
+            animation: fadeIn 0.25s ease;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Google Sign-In */
+        .google-section {
+            text-align: center;
+        }
+
+        .google-btn {
+            width: 100%;
+            padding: 14px 20px;
+            background: white;
+            border: 1px solid #dadce0;
+            border-radius: var(--radius-sm);
+            color: #3c4043;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.15s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .google-btn:hover {
+            background: #f8f9fa;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            transform: translateY(-1px);
+        }
+
+        .google-btn:active {
+            transform: translateY(0);
+            background: #f1f3f4;
+        }
+
+        .google-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .google-btn .g-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #dadce0;
+            border-top: 2px solid #4285F4;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            display: none;
+        }
+
+        .google-btn.loading .g-spinner {
+            display: block;
+        }
+
+        .google-btn.loading .g-text {
+            display: none;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .google-note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 14px;
+            line-height: 1.5;
+        }
+
+        .google-note strong {
+            color: var(--text-secondary);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .features-mini {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .feature-mini {
+            padding: 10px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            text-align: center;
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+        }
+
+        .feature-mini span {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        /* API Key Form */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.15s ease;
+        }
+
+        .form-input:focus {
+            border-color: var(--accent-1);
+            box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.12);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 4px;
+            transition: 0.15s ease;
+        }
+
+        .password-toggle:hover {
+            color: var(--text-primary);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 13px 20px;
+            background: var(--accent-gradient);
+            border: none;
+            border-radius: var(--radius-sm);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md), var(--shadow-glow);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .api-note {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        .api-note a {
+            color: var(--accent-1);
+            text-decoration: none;
+        }
+
+        .api-note a:hover {
+            text-decoration: underline;
+        }
+
+        .form-error {
+            display: none;
+            padding: 10px 14px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: var(--radius-sm);
+            color: #fca5a5;
+            font-size: 0.8rem;
+            margin-bottom: 16px;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-error.show {
+            display: flex;
+        }
+
+        .powered-by {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            opacity: 0.6;
+        }
+
+        /* Toast */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            min-width: 280px;
+            animation: toastIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .toast.success {
+            border-left: 3px solid #34d399;
+        }
+
+        .toast.error {
+            border-left: 3px solid #ef4444;
+        }
+
+        .toast.info {
+            border-left: 3px solid var(--accent-1);
+        }
+
+        .toast.removing {
+            animation: toastOut 0.3s ease forwards;
+        }
+
+        @keyframes toastIn {
+            0% {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes toastOut {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 28px 22px;
+            }
+
+            .login-logo h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-gradient"></div>
+    <div class="bg-particles" id="particles"></div>
+
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-logo">
+                <div class="logo-icon-wrapper">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                    </svg>
+                </div>
+                <h1>Camber AI</h1>
+                <p class="subtitle">PDF Chat Assistant for Civil Engineering</p>
+            </div>
+
+            <!-- Auth Tabs -->
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="tabGoogle" onclick="switchTab('google')">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"
+                            fill="#4285F4" />
+                        <path
+                            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                            fill="#34A853" />
+                    </svg>
+                    Google Sign In
+                </button>
+                <button class="auth-tab" id="tabApiKey" onclick="switchTab('apikey')">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4">
+                        </path>
+                    </svg>
+                    API Key
+                </button>
+            </div>
+
+            <!-- Error -->
+            <div class="form-error" id="formError"><span>❌</span><span id="errorText"></span></div>
+
+            <!-- Google Sign-In Panel -->
+            <div class="auth-panel active" id="googlePanel">
+                <div class="google-section">
+                    <button class="google-btn" id="googleSignInBtn" onclick="handleGoogleSignIn()">
+                        <div class="g-spinner"></div>
+                        <svg class="g-text" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"
+                                fill="#4285F4" />
+                            <path
+                                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                                fill="#34A853" />
+                            <path
+                                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                                fill="#FBBC05" />
+                            <path
+                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                                fill="#EA4335" />
+                        </svg>
+                        <span class="g-text">Sign in with Google</span>
+                    </button>
+                    <p class="google-note">
+                        Apne <strong>Google / Gemini account</strong> se sign in karein.<br>
+                        Bilkul waise hi jaise Gemini website pe login karte ho! 🔐
+                    </p>
+
+                    <div class="features-mini">
+                        <div class="feature-mini"><span>📄</span> PDF Analysis</div>
+                        <div class="feature-mini"><span>🤖</span> AI Chat</div>
+                        <div class="feature-mini"><span>🧮</span> Smart Logic</div>
+                        <div class="feature-mini"><span>🌐</span> Multi-Lang</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- API Key Panel -->
+            <div class="auth-panel" id="apiKeyPanel">
+                <form onsubmit="handleApiKeyLogin(event)">
+                    <div class="form-group">
+                        <label class="form-label">Gemini API Key</label>
+                        <div class="password-wrapper">
+                            <input type="password" class="form-input" id="apiKeyInput"
+                                placeholder="API key paste karein..." required>
+                            <button type="button" class="password-toggle" onclick="toggleVis('apiKeyInput', this)">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="api-note">🔑 Free API key: <a href="https://aistudio.google.com/apikey"
+                                target="_blank">Google AI Studio</a></p>
+                    </div>
+                    <button type="submit" class="btn-login">Continue with API Key</button>
+                </form>
+            </div>
+        </div>
+        <button class="theme-toggle-mini" id="themeToggleMini" onclick="toggleTheme()" title="Switch theme">🌙</button>
+        <p class="powered-by">Powered by Google Gemini AI ✦</p>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <script>
+        // ===== Config =====
+        const GOOGLE_CLIENT_ID = '616754433827-5q1hhn8r20542kivghb00nouguueo14q.apps.googleusercontent.com';
+        const SCOPES = 'https://www.googleapis.com/auth/cloud-platform openid email profile';
+
+        let tokenClient = null;
+
+        // ===== Particles =====
+        (function () {
+            const c = document.getElementById('particles');
+            for (let i = 0; i < 25; i++) {
+                const p = document.createElement('div'); p.className = 'particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDelay = Math.random() * 8 + 's';
+                p.style.animationDuration = (6 + Math.random() * 6) + 's';
+                p.style.background = ['#818cf8', '#c084fc', '#f472b6'][Math.floor(Math.random() * 3)];
+                p.style.width = (1 + Math.random() * 2) + 'px'; p.style.height = p.style.width;
+                c.appendChild(p);
+            }
+        })();
+
+        // ===== Check session =====
+        (function () {
+            const s = localStorage.getItem('camber_session');
+            if (s) { try { const u = JSON.parse(s); if (u && u.email) window.location.href = 'index.html'; } catch (e) { } }
+        })();
+
+        // ===== Init Google OAuth =====
+        function initGoogleAuth() {
+            if (typeof google === 'undefined' || !google.accounts || !google.accounts.oauth2) {
+                setTimeout(initGoogleAuth, 500);
+                return;
+            }
+            tokenClient = google.accounts.oauth2.initTokenClient({
+                client_id: GOOGLE_CLIENT_ID,
+                scope: SCOPES,
+                callback: handleTokenResponse,
+                error_callback: handleTokenError
+            });
+        }
+        setTimeout(initGoogleAuth, 1000);
+
+        // ===== Google Sign In =====
+        function handleGoogleSignIn() {
+            hideError();
+            if (!tokenClient) {
+                if (typeof google === 'undefined') {
+                    showError('Google services load nahi hua. Page refresh karein.');
+                    return;
+                }
+                initGoogleAuth();
+                setTimeout(() => {
+                    if (tokenClient) tokenClient.requestAccessToken({ prompt: 'consent' });
+                    else showError('Google services load ho raha hai, 2 sec mein dobara try karein.');
+                }, 1000);
+                return;
+            }
+            const btn = document.getElementById('googleSignInBtn');
+            btn.classList.add('loading');
+            tokenClient.requestAccessToken({ prompt: 'consent' });
+        }
+
+        async function handleTokenResponse(resp) {
+            const btn = document.getElementById('googleSignInBtn');
+            if (resp.error) {
+                btn.classList.remove('loading');
+                showError('Google Sign-In failed: ' + resp.error);
+                return;
+            }
+
+            const accessToken = resp.access_token;
+
+            // Get user info
+            try {
+                const userRes = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+                    headers: { 'Authorization': 'Bearer ' + accessToken }
+                });
+                const userInfo = await userRes.json();
+
+                // Save session
+                const session = {
+                    name: userInfo.name || 'User',
+                    email: userInfo.email || '',
+                    picture: userInfo.picture || '',
+                    accessToken: accessToken,
+                    authMode: 'google',
+                    loggedInAt: new Date().toISOString()
+                };
+                localStorage.setItem('camber_session', JSON.stringify(session));
+
+                showToast('Welcome, ' + session.name + '! 🎉', 'success');
+                setTimeout(() => { window.location.href = 'index.html'; }, 800);
+            } catch (e) {
+                // Even if user info fails, we have the token
+                const session = {
+                    name: 'Google User',
+                    email: '',
+                    accessToken: accessToken,
+                    authMode: 'google',
+                    loggedInAt: new Date().toISOString()
+                };
+                localStorage.setItem('camber_session', JSON.stringify(session));
+                showToast('Signed in! 🎉', 'success');
+                setTimeout(() => { window.location.href = 'index.html'; }, 800);
+            }
+        }
+
+        function handleTokenError(err) {
+            document.getElementById('googleSignInBtn').classList.remove('loading');
+            if (err.type === 'popup_closed') {
+                showToast('Sign-in popup band ho gaya', 'info');
+            } else {
+                showError('Google Sign-In error. API Key tab try karein.');
+            }
+        }
+
+        // ===== API Key Login =====
+        function handleApiKeyLogin(e) {
+            e.preventDefault();
+            hideError();
+            const key = document.getElementById('apiKeyInput').value.trim();
+            if (!key) { showError('API key enter karein!'); return; }
+
+            const session = {
+                name: 'User',
+                email: '',
+                apiKey: key,
+                authMode: 'apikey',
+                loggedInAt: new Date().toISOString()
+            };
+            localStorage.setItem('camber_session', JSON.stringify(session));
+            localStorage.setItem('camber_api_key', key);
+            showToast('API key saved! ✅', 'success');
+            setTimeout(() => { window.location.href = 'index.html'; }, 600);
+        }
+
+        // ===== Tabs =====
+        function switchTab(tab) {
+            hideError();
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.auth-panel').forEach(p => p.classList.remove('active'));
+            if (tab === 'google') {
+                document.getElementById('tabGoogle').classList.add('active');
+                document.getElementById('googlePanel').classList.add('active');
+            } else {
+                document.getElementById('tabApiKey').classList.add('active');
+                document.getElementById('apiKeyPanel').classList.add('active');
+            }
+        }
+
+        // ===== Utils =====
+        function toggleVis(id, btn) {
+            const el = document.getElementById(id);
+            el.type = el.type === 'password' ? 'text' : 'password';
+        }
+        function showError(msg) {
+            document.getElementById('errorText').textContent = msg;
+            document.getElementById('formError').classList.add('show');
+        }
+        function hideError() { document.getElementById('formError').classList.remove('show'); }
+        function showToast(msg, type) {
+            const t = document.createElement('div'); t.className = 'toast ' + type;
+            t.innerHTML = '<span>' + ({ success: '✅', error: '❌', info: 'ℹ️' }[type] || 'ℹ️') + '</span><span>' + msg + '</span>';
+            document.getElementById('toastContainer').appendChild(t);
+            setTimeout(() => { t.classList.add('removing'); setTimeout(() => t.remove(), 300); }, 3500);
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme') || 'dark';
+            const next = current === 'dark' ? 'light' : 'dark';
+            if (next === 'light') document.documentElement.setAttribute('data-theme', 'light');
+            else document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('camber_theme', next);
+            document.getElementById('themeToggleMini').textContent = next === 'light' ? '☀️' : '🌙';
+        }
+        // Init theme toggle icon
+        (function () { const t = localStorage.getItem('camber_theme'); if (t === 'light') document.getElementById('themeToggleMini').textContent = '☀️'; })();
+    </script>
+</body>
+
+</html>
