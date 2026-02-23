@@ -1120,9 +1120,18 @@ body {
         position: fixed;
         left: 0;
         top: 0;
+        width: 320px;
+        max-width: 85vw;
         z-index: 50;
         transform: translateX(-100%);
         box-shadow: var(--shadow-lg);
+        background: var(--bg-primary);
+        backdrop-filter: none;
+        border-right: none;
+    }
+
+    #uploadBlock {
+        display: none;
     }
 
     .sidebar.open {
@@ -1161,8 +1170,8 @@ body {
 
 @media (max-width: 480px) {
     .sidebar {
-        width: 280px;
-        min-width: 280px;
+        width: 85vw;
+        min-width: 250px;
     }
 
     .input-wrapper {
@@ -1180,9 +1189,9 @@ body {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
     z-index: 49;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(2px);
 }
 
 .sidebar-overlay.active {

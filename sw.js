@@ -1,5 +1,5 @@
 // Camber AI Service Worker — Enables offline + PWA install
-const CACHE_NAME = 'camber-ai-v2';
+const CACHE_NAME = 'camber-ai-v3';
 const ASSETS_TO_CACHE = [
     '/camber-ai/login.html',
     '/camber-ai/index.html',
