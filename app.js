@@ -172,6 +172,11 @@ async function init() {
         await renderConversationList();
     } catch (e) { console.error('DB init error:', e); }
 
+    // If no API key, prompt user for one
+    if (!state.apiKey) {
+        showApiKeyPrompt();
+    }
+
     startNewChat(true);
 }
 
@@ -532,6 +537,12 @@ async function sendMessage() {
 }
 
 async function callGeminiAPI(userMessage, msgFiles = []) {
+    // Always require API key for Gemini calls
+    if (!state.apiKey) {
+        showApiKeyPrompt();
+        throw new Error('API key required. Please enter your Gemini API key.');
+    }
+
     const systemContext = buildSystemPrompt();
 
     // Build content parts for this message
@@ -566,14 +577,9 @@ async function callGeminiAPI(userMessage, msgFiles = []) {
         ]
     };
 
-    let apiUrl, headers;
-    if (state.authMode === 'google' && state.accessToken) {
-        apiUrl = GEMINI_API_URL;
-        headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + state.accessToken };
-    } else {
-        apiUrl = GEMINI_API_URL + '?key=' + state.apiKey;
-        headers = { 'Content-Type': 'application/json' };
-    }
+    // Always use API key for Gemini calls (Google OAuth is for identity only)
+    const apiUrl = GEMINI_API_URL + '?key=' + state.apiKey;
+    const headers = { 'Content-Type': 'application/json' };
 
     const response = await fetch(apiUrl, { method: 'POST', headers, body: JSON.stringify(requestBody) });
 
@@ -830,6 +836,58 @@ function showToast(msg, type = 'info') {
     t.innerHTML = `<span>${{ success: '✅', error: '❌', info: 'ℹ️' }[type] || 'ℹ️'}</span><span>${msg}</span>`;
     els.toastContainer.appendChild(t);
     setTimeout(() => { t.classList.add('removing'); setTimeout(() => t.remove(), 300); }, 3500);
+}
+
+// ============ API Key Prompt ============
+function showApiKeyPrompt() {
+    // Remove existing modal if any
+    const existing = document.getElementById('apiKeyModal');
+    if (existing) existing.remove();
+
+    const modal = document.createElement('div');
+    modal.id = 'apiKeyModal';
+    modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:9999;backdrop-filter:blur(8px);';
+    modal.innerHTML = `
+        <div style="background:var(--bg-card, #1a1b2e);border:1px solid var(--border-color, #2a2b4a);border-radius:16px;padding:32px;max-width:440px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+            <h3 style="color:var(--text-primary, #fff);margin:0 0 8px;font-size:1.3rem;">🔑 Gemini API Key Required</h3>
+            <p style="color:var(--text-secondary, #aaa);font-size:0.85rem;margin:0 0 16px;line-height:1.5;">
+                AI chat ke liye apna Gemini API key daalo.<br>
+                Free key yahan se milega: <a href="https://aistudio.google.com/apikey" target="_blank" style="color:#818cf8;text-decoration:none;font-weight:600;">Google AI Studio →</a>
+            </p>
+            <input type="text" id="apiKeyModalInput" placeholder="Paste your API key here..." 
+                style="width:100%;padding:12px 16px;border-radius:10px;border:1px solid var(--border-color, #2a2b4a);background:var(--bg-glass, rgba(255,255,255,0.05));color:var(--text-primary, #fff);font-size:0.9rem;outline:none;margin-bottom:16px;box-sizing:border-box;">
+            <button id="apiKeyModalSave" 
+                style="width:100%;padding:12px;border:none;border-radius:10px;background:linear-gradient(135deg,#818cf8,#c084fc);color:#fff;font-size:0.95rem;font-weight:600;cursor:pointer;transition:opacity 0.2s;">
+                Save & Start Chatting ✨
+            </button>
+            <p style="color:var(--text-muted, #666);font-size:0.72rem;margin:12px 0 0;text-align:center;">
+                Key sirf aapke browser mein save hogi — kisi ko nahi dikhegi
+            </p>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    const input = document.getElementById('apiKeyModalInput');
+    const saveBtn = document.getElementById('apiKeyModalSave');
+
+    saveBtn.addEventListener('click', () => {
+        const key = input.value.trim();
+        if (!key) { input.style.borderColor = '#f472b6'; return; }
+        state.apiKey = key;
+        localStorage.setItem('camber_api_key', key);
+        // Update session
+        const session = JSON.parse(localStorage.getItem('camber_session') || '{}');
+        session.apiKey = key;
+        localStorage.setItem('camber_session', JSON.stringify(session));
+        modal.remove();
+        showToast('API key saved! Ab chat kar sakte ho ✨', 'success');
+    });
+
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') saveBtn.click();
+    });
+
+    setTimeout(() => input.focus(), 100);
 }
 
 // ============ Start ============
