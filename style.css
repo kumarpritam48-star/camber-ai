@@ -1507,3 +1507,322 @@ body {
 .client-id-actions .btn {
     flex: 1;
 }
+
+/* ========================================
+   NEW FEATURES — Styles
+   ======================================== */
+
+/* Conversation List */
+.convo-list {
+    max-height: 200px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.convo-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.convo-list::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+.convo-item {
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border: 1px solid transparent;
+}
+
+.convo-item:hover {
+    background: var(--bg-glass-hover);
+    border-color: var(--border-color);
+}
+
+.convo-item.active {
+    background: var(--accent-gradient-subtle);
+    border-color: var(--border-active);
+}
+
+.convo-title {
+    font-size: 0.78rem;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+}
+
+.convo-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3px;
+}
+
+.convo-meta span {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+}
+
+.convo-delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.7rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+    padding: 2px;
+}
+
+.convo-item:hover .convo-delete {
+    opacity: 0.7;
+}
+
+.convo-delete:hover {
+    opacity: 1 !important;
+}
+
+.no-convos {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    padding: 10px;
+    text-align: center;
+}
+
+/* Attach Button */
+.attach-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.attach-btn:hover {
+    color: var(--accent-1);
+    background: var(--bg-glass-hover);
+}
+
+/* Pending Files */
+.pending-files {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px 12px 4px;
+}
+
+.pending-file-chip {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    animation: fadeIn 0.2s ease;
+}
+
+.pending-file-name {
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pending-file-remove {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0 2px;
+    line-height: 1;
+}
+
+.pending-file-remove:hover {
+    color: var(--accent-3);
+}
+
+/* File Items in Sidebar */
+.file-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-glass);
+    border: 1px solid var(--border-color);
+    margin-bottom: 4px;
+    transition: all var(--transition-fast);
+}
+
+.file-item:hover {
+    background: var(--bg-glass-hover);
+}
+
+.file-item-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.file-item-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.file-item-name {
+    font-size: 0.78rem;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+}
+
+.file-item-meta {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+}
+
+.file-item-remove {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    transition: all var(--transition-fast);
+}
+
+.file-item-remove:hover {
+    color: var(--accent-3);
+    background: rgba(244, 114, 182, 0.1);
+}
+
+/* File Processing */
+.file-processing {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--bg-glass);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+    margin-top: 8px;
+    animation: fadeIn 0.3s ease;
+}
+
+.file-processing-text {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+}
+
+/* Message File Chips */
+.msg-file-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.msg-file-chip {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 6px 10px;
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+}
+
+.msg-file-chip-name {
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.msg-file-preview {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* Code Block Actions */
+.code-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid var(--border-color);
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    margin: -1em -1em 0.5em -1em;
+}
+
+[data-theme="light"] .code-actions {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.code-lang-tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--accent-1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-right: auto;
+    font-family: 'Inter', sans-serif;
+}
+
+.code-action-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.68rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-family: 'Inter', sans-serif;
+}
+
+.code-action-btn:hover {
+    background: var(--bg-glass-hover);
+    color: var(--text-primary);
+    border-color: var(--accent-1);
+}
+
+/* Input wrapper with attach button */
+.input-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

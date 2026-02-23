@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="AI-powered PDF Chat - Upload civil engineering PDFs and chat with Gemini AI to analyze, discuss, and get insights from your documents.">
-    <title>Camber AI — PDF Chat Assistant</title>
+        content="Camber AI — Upload PDFs, images, Word, Excel files and chat with AI. Multi-format document analysis powered by Gemini.">
+    <title>Camber AI — AI Assistant</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
@@ -37,7 +37,7 @@
                     </div>
                     <div>
                         <h1 class="logo-text">Camber AI</h1>
-                        <span class="logo-sub">PDF Chat Assistant</span>
+                        <span class="logo-sub">AI Assistant</span>
                     </div>
                 </div>
                 <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
@@ -83,7 +83,7 @@
                 </button>
             </div>
 
-            <!-- PDF Upload Section -->
+            <!-- Upload Files Section -->
             <div class="sidebar-section">
                 <div class="section-title">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -92,34 +92,47 @@
                         <polyline points="17 8 12 3 7 8"></polyline>
                         <line x1="12" y1="3" x2="12" y2="15"></line>
                     </svg>
-                    <span>Upload PDF</span>
+                    <span>Upload Files</span>
                 </div>
                 <div class="upload-zone" id="uploadZone">
-                    <input type="file" id="pdfInput" accept=".pdf" hidden>
+                    <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx,.csv" multiple
+                        hidden>
                     <div class="upload-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                            <polyline points="14 2 14 8 20 8"></polyline>
-                            <line x1="12" y1="18" x2="12" y2="12"></line>
-                            <polyline points="9 15 12 12 15 15"></polyline>
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
                         </svg>
                     </div>
-                    <p class="upload-text">Drag & drop PDF here</p>
-                    <p class="upload-subtext">or click to browse</p>
+                    <p class="upload-text">Drag & drop files here</p>
+                    <p class="upload-subtext">PDF, Images, Word, Excel, CSV</p>
                 </div>
             </div>
 
-            <!-- Uploaded PDFs List -->
-            <div class="sidebar-section" id="pdfListSection" style="display:none;">
+            <!-- Uploaded Files List -->
+            <div class="sidebar-section" id="fileListSection" style="display:none;">
                 <div class="section-title">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
                         <polyline points="13 2 13 9 20 9"></polyline>
                     </svg>
-                    <span>Loaded Documents</span>
+                    <span>Loaded Files</span>
                 </div>
-                <div class="pdf-list" id="pdfList"></div>
+                <div class="file-list" id="fileList"></div>
+            </div>
+
+            <!-- Past Conversations -->
+            <div class="sidebar-section">
+                <div class="section-title">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <span>History</span>
+                </div>
+                <div class="convo-list" id="convoList">
+                    <div class="no-convos">No past conversations</div>
+                </div>
             </div>
 
             <!-- Language Selector -->
@@ -186,27 +199,27 @@
                         </svg>
                     </div>
                     <h2 class="welcome-title" id="welcomeTitle">Welcome to Camber AI</h2>
-                    <p class="welcome-subtitle">Upload your Civil Engineering PDF and start chatting with AI</p>
+                    <p class="welcome-subtitle">Upload files and start chatting with AI</p>
                     <div class="welcome-features">
                         <div class="feature-card">
                             <div class="feature-icon">📄</div>
-                            <h3>Upload PDF</h3>
-                            <p>Upload reports, questions, or any civil engineering document</p>
+                            <h3>Multi Files</h3>
+                            <p>PDF, Word, Excel, CSV, Images — sab upload karo</p>
                         </div>
                         <div class="feature-card">
                             <div class="feature-icon">🤖</div>
                             <h3>AI Analysis</h3>
-                            <p>Gemini AI reads, understands, and discusses your document</p>
+                            <p>Gemini AI reads, understands, and discusses your files</p>
                         </div>
                         <div class="feature-card">
-                            <div class="feature-icon">🧮</div>
-                            <h3>Smart Logic</h3>
-                            <p>Get calculations, analysis, and detailed results</p>
+                            <div class="feature-icon">💾</div>
+                            <h3>15 Day History</h3>
+                            <p>Conversations saved for 15 days, resume anytime</p>
                         </div>
                         <div class="feature-card">
-                            <div class="feature-icon">🌐</div>
-                            <h3>Multi-Language</h3>
-                            <p>Chat in Hindi, English, or Hinglish — your choice!</p>
+                            <div class="feature-icon">⬇️</div>
+                            <h3>Download Code</h3>
+                            <p>Copy and download code, files from AI responses</p>
                         </div>
                     </div>
                 </div>
@@ -217,9 +230,21 @@
 
             <!-- Input Bar -->
             <div class="input-bar">
+                <!-- Pending files preview -->
+                <div class="pending-files" id="pendingFiles" style="display:none;"></div>
                 <div class="input-wrapper">
+                    <button class="attach-btn" id="attachBtn" title="Attach file">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48">
+                            </path>
+                        </svg>
+                    </button>
+                    <input type="file" id="attachInput" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx,.csv"
+                        multiple hidden>
                     <textarea id="messageInput" class="message-input"
-                        placeholder="Type your message... PDF ke baare mein kuch bhi poocho!" rows="1"></textarea>
+                        placeholder="Type your message... Files bhi attach kar sakte ho! 📎" rows="1"></textarea>
                     <button class="send-btn" id="sendBtn" aria-label="Send message">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -239,6 +264,8 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
     <script src="app.js"></script>
 </body>
 
