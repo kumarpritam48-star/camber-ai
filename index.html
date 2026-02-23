@@ -8,6 +8,18 @@
     <meta name="description"
         content="Camber AI — Upload PDFs, images, Word, Excel files and chat with AI. Multi-format document analysis powered by Gemini.">
     <title>Camber AI — AI Assistant</title>
+
+    <!-- PWA Settings -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#818cf8">
+    <link rel="apple-touch-icon" href="icon-512.png">
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').catch(err => console.log('SW reg failed', err));
+            });
+        }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"

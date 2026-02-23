@@ -1,0 +1,22 @@
+{
+    "name": "Camber AI — AI Assistant",
+    "short_name": "Camber AI",
+    "description": "AI-powered assistant for document analysis, coding, and intelligent conversations",
+    "start_url": "/camber-ai/login.html",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#0a0b1a",
+    "theme_color": "#818cf8",
+    "scope": "/camber-ai/",
+    "icons": [
+        {
+            "src": "icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["productivity", "utilities", "education"],
+    "lang": "hi",
+    "dir": "ltr"
+}
