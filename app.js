@@ -720,6 +720,17 @@ function addCodeBlockButtons(messageDiv) {
 }
 
 function downloadFile(content, filename, mimeType = 'text/plain') {
+    // If running inside Android WebView with JSBridge, use native download
+    if (window.JSBridge && typeof window.JSBridge.downloadBase64 === 'function') {
+        try {
+            const base64 = btoa(unescape(encodeURIComponent(content)));
+            window.JSBridge.downloadBase64(base64, filename, mimeType);
+            return;
+        } catch (e) {
+            console.error("Native download failed:", e);
+        }
+    }
+
     const blob = new Blob([content], { type: mimeType });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
